@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAESTRO | 7th Business Unit</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Background Image Container -->
+    <div class="background-container">
+        <div class="overlay"></div>
+        <img src="conductor_hero.png" alt="Orchestra Conductor" class="bg-image">
+    </div>
+
+    <!-- Interface Layer -->
+    <div class="app-container">
+        <header class="glass-header">
+            <div class="logo">MAESTRO</div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Announcements</a></li>
+                    <li><a href="#">Curriculum</a></li>
+                    <li><a href="#">Login</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <p class="subtitle fade-in-up">The 7th Business Unit</p>
+                    <h1 class="title fade-in-up delay-1">THE MAESTRO</h1>
+                    <p class="slogan fade-in-up delay-2">Leading the Financial Symphony</p>
+                    <button class="cta-button fade-in-up delay-3">Enter the Stage</button>
+                </div>
+            </section>
+
+            <!-- Director's Message (Pinned Notice) -->
+            <section class="directors-message">
+                <div class="notice-badge">PINNED NOTICE</div>
+                <div class="notice-content">
+                    <h2>단장님 메시지: 2026년 상반기 전략 발표</h2>
+                    <p>이번 달의 핵심 목표와 방향성을 확인하세요. 모든 지점원은 필독 바랍니다.</p>
+                </div>
+                <button class="notice-btn">View Details</button>
+            </section>
+
+            <!-- Digital Archive -->
+            <section class="digital-archive-section">
+                <h2 class="section-title">Digital Archive</h2>
+                <div class="archive-container">
+                    <!-- Cards will be dynamically populated or static for now -->
+                    <div class="archive-card" onclick="openModal('video', 'MBA 8기 특강')">
+                        <div class="card-thumbnail">
+                            <img src="lecture_thumbnail.png" alt="Lecture">
+                            <span class="card-tag">MBA 8기</span>
+                        </div>
+                        <div class="card-info">
+                            <h3>금융 트렌드 분석</h3>
+                        </div>
+                    </div>
+                    <div class="archive-card" onclick="openModal('pdf', '세무 실무 가이드')">
+                        <div class="card-thumbnail">
+                            <img src="lecture_thumbnail.png" alt="Lecture"> <!-- Reusing thumbnail for consistency -->
+                            <span class="card-tag">세무 실무</span>
+                        </div>
+                        <div class="card-info">
+                            <h3>2026 개정 세법</h3>
+                        </div>
+                    </div>
+                    <div class="archive-card" onclick="openModal('video', '단장님 특강')">
+                        <div class="card-thumbnail">
+                            <img src="lecture_thumbnail.png" alt="Lecture">
+                            <span class="card-tag">단장님 특강</span>
+                        </div>
+                        <div class="card-info">
+                            <h3>Mastering the Close</h3>
+                        </div>
+                    </div>
+                    <div class="archive-card">
+                        <div class="card-thumbnail">
+                            <img src="lecture_thumbnail.png" alt="Lecture">
+                            <span class="card-tag">자료</span>
+                        </div>
+                        <div class="card-info">
+                            <h3>VIP 상담 프로세스</h3>
+                        </div>
+                    </div>
+                    <!-- Duplicate for scrolling effect -->
+                    <div class="archive-card">
+                        <div class="card-thumbnail">
+                            <img src="lecture_thumbnail.png" alt="Lecture">
+                            <span class="card-tag">Trend</span>
+                        </div>
+                        <div class="card-info">
+                            <h3>Global Market Report</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AP Dashboard -->
+            <section class="ap-dashboard-section">
+                <div class="dashboard-header">
+                    <h2 class="section-title">AP Dashboard</h2>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="admin-toggle">
+                        <label for="admin-toggle" class="toggle-label">
+                            <span class="toggle-text user">Personal</span>
+                            <span class="toggle-text admin">Admin</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- User View -->
+                <div id="user-dashboard" class="dashboard-grid">
+                    <div class="dashboard-card input-card">
+                        <h3>My Performance</h3>
+                        <div class="input-group">
+                            <label>Target AP (Month)</label>
+                            <input type="range" id="target-ap-slider" min="0" max="1000" value="500"
+                                class="gold-slider">
+                            <span id="target-ap-value">500</span>
+                        </div>
+                        <div class="input-group">
+                            <label>Today Achieved AP</label>
+                            <input type="number" id="today-ap-input" placeholder="0" class="glass-input">
+                        </div>
+                        <button class="update-btn" onclick="updateAPData()">Update Status</button>
+                    </div>
+
+                    <div class="dashboard-card chart-card">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+
+                    <div class="dashboard-card chart-card">
+                        <canvas id="goalPieChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Admin View (Initially Hidden) -->
+                <div id="admin-dashboard" class="dashboard-grid hidden">
+                    <div class="dashboard-card full-width">
+                        <h3>Unit Ranking</h3>
+                        <table class="ranking-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Name</th>
+                                    <th>Total AP</th>
+                                    <th>Achievement %</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ranking-list">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Modal -->
+        <div id="content-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+                <div id="modal-body"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
